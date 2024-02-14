@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:53:08 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/13 15:49:09 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/14 20:01:00 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,13 @@ char    **ft_fill_map(char *map_name)
     int i;
 
     i = 0;
-    map = malloc(sizeof(char *) * ft_map_size(map_name) + 1);
     fd = open(map_name, O_RDONLY);
+    if (fd == -1)
+    {
+        // printf("Error map name\n");
+        return (NULL);
+    }
+    map = malloc(sizeof(char *) * (ft_map_size(map_name) + 1));
     line = get_next_line(fd);
     while (line)
     {

@@ -22,7 +22,7 @@
 
 char	*get_next_line(int fd);
 
-int		ft_strchr(char *s, int c);
+int		ft_sstrchr(char *s, int c);
 
 char	*ft_fill(char *str);
 
@@ -30,11 +30,11 @@ void	ft_buffer_copy(char *buff, char *str);
 
 char	*ft_next(char *str);
 
-char	*ft_strjoin(char *s1, char *s2, int i, int j);
+char	*ft_sstrjoin(char *s1, char *s2, int i, int j);
 
-char	*ft_strdup(char *src);
+char	*ft_sstrdup(char *src);
 
-size_t	ft_strlen(char *str);
+size_t	ft_sstrlen(char *str);
 
 int		ft_is_free(int size, char *buff);
 

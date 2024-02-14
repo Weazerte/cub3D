@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:52:03 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/13 17:14:11 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/14 15:24:29 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,23 @@ int ft_valid_char(char c)
 char ft_wich_direction(char **map)
 {
     char direction;
+    int i;
+    int j;
 
     direction = 0;
-    while (**map)
+    i = 0;
+    while (map[i])
     {
-        if (**map == 'N' || **map == 'S' || **map == 'E' || **map == 'W')
+        j = 0;
+        while (map[i][j])
         {
-            direction = **map;
-            **map = '0';
+            if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
+            {
+                direction = map[i][j] ;
+            }
+            j++;
         }
-        (*map)++;
+        i++;
     }
     return (direction);
 }

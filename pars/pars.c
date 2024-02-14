@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:13:24 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/13 17:35:53 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/14 20:09:18 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ int ft_check_name(char *name)
     return (0);
 }
 
-static void    ft_print_map(char **map)
-{
-    int i;
+// static void    ft_print_map(char **map)
+// {
+//     int i;
 
-    i = 0;
-    while (map[i])
-    {
-        printf("%s", map[i]);
-        i++;
-    }
-    printf("\n");
-}
+//     i = 0;
+//     while (map[i])
+//     {
+//         printf("%s", map[i]);
+//         i++;
+//     }
+//     printf("\n");
+// }
 
 int main(int ac, char **av)
 {
@@ -46,39 +46,55 @@ int main(int ac, char **av)
 
     if (ac == 2)
     {
-        
         if (ft_check_name(av[1]) == 1)
         {
-            printf("Error\nInvalid file name\n");
+            // printf("Error Invalid file name\n");
             return (1);
         }
         map = ft_fill_map(av[1]);
+        if (map == NULL)
+            return (1);
         tibs = malloc(sizeof(t_tibs));
         if (tibs == NULL)
         {
-            printf("Error\nmalloc\n");
+            // printf("Error malloc\n");
             ft_free_map(map);
             return (1);
         }
         tibs->map = ft_map_dup(map);
         map_4_test = ft_map_dup(map);
         tibs->direction = ft_wich_direction(map_4_test);
+        tibs->mlx_ptr = mlx_init();
+
+        
         if (ft_check_spawn(map_4_test) == 1)
         {
-            printf("Error\nInvalid spawn\n");
+            // printf("Error Invalid spawn\n");
             ft_free_pars(tibs, map, map_4_test);
             return (1);
         }
+        
+        
         if (ft_check_outline(map_4_test, tibs->direction) == 1)
         {
-            printf("Error\nInvalid map\n");
+            // printf("Error Invalid map\n");
             ft_free_pars(tibs, map ,map_4_test);
             return (1);
         }
-        ft_print_map(map_4_test);
+        
+        if (ft_check_texture(map, tibs) == 1)
+        {
+            ft_free_pars(tibs, map ,map_4_test);
+            return (1);
+        }
+
+        // printf("map valide\n");
+        ft_free_mlx(tibs);
         ft_free_pars(tibs, map ,map_4_test);
     }
     return (0);
 }
 
-//invalid free sur map_4_test l 79
+//find texture  : reste le \n a la fin du path, enelever en modifiant le strdup 
+// recuperer le rgb
+//leak

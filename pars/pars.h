@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:58:18 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/13 17:24:56 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/14 20:08:45 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include "../get_next_line/get_next_line.h"
+#include "../minilibx-linux/mlx.h"
+#include "../libft/libft.h"
 
 typedef struct s_rgb
 {
@@ -32,13 +34,14 @@ typedef struct s_rgb
 
 typedef struct s_tibs
 {
-    char **map;
-    t_rgb *rgb;
+    char    **map;
+    t_rgb   *rgb;
     char    direction;
-    void   *north_texture;;
-    void   *south_texture;
-    void   *east_texture;
-    void   *west_texture;
+    void    *mlx_ptr;
+    void    *north_texture;;
+    void    *south_texture;
+    void    *east_texture;
+    void    *west_texture;
 }              t_tibs;
 
 char    **ft_map_dup(char **map);
@@ -49,5 +52,7 @@ char    **ft_fill_map(char *map_name);
 void    ft_free_pars(t_tibs *tibs, char **map , char **map2);
 void    ft_free_map(char **map);
 char    ft_wich_direction(char **map);
+int     ft_check_texture(char **map, t_tibs *tibs);
+void    ft_free_mlx(t_tibs *tibs);
 
 #endif

@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	size = 1;
-	while (size && ft_strchr(str[fd], '\n') <= 0)
+	while (size && ft_sstrchr(str[fd], '\n') <= 0)
 	{
 		buff = malloc(sizeof(char) * BUFFER_SIZE + 1);
 		if (!buff)
@@ -31,7 +31,7 @@ char	*get_next_line(int fd)
 		if (ft_is_free(size, buff) == 0)
 			break ;
 		buff[size] = 0;
-		str[fd] = ft_strjoin(str[fd], buff, -1, -1);
+		str[fd] = ft_sstrjoin(str[fd], buff, -1, -1);
 		free(buff);
 	}
 	stash = ft_fill(str[fd]);
@@ -50,7 +50,7 @@ int	ft_is_free(int size, char *buff)
 		return (1);
 }
 
-char	*ft_strjoin(char *s1, char *s2, int i, int j)
+char	*ft_sstrjoin(char *s1, char *s2, int i, int j)
 {
 	char	*tmp;
 
@@ -63,7 +63,7 @@ char	*ft_strjoin(char *s1, char *s2, int i, int j)
 	}
 	if (!s2 || !s1)
 		return (NULL);
-	tmp = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	tmp = (char *)malloc(sizeof(char) * (ft_sstrlen(s1) + ft_sstrlen(s2) + 1));
 	if (!tmp)
 		return (NULL);
 	while (s1[++i])
