@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 11:13:24 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/14 20:09:18 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/17 13:38:24 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ int main(int ac, char **av)
         tibs->map = ft_map_dup(map);
         map_4_test = ft_map_dup(map);
         tibs->direction = ft_wich_direction(map_4_test);
-        tibs->mlx_ptr = mlx_init();
 
-        
         if (ft_check_spawn(map_4_test) == 1)
         {
             // printf("Error Invalid spawn\n");
@@ -89,7 +87,6 @@ int main(int ac, char **av)
         }
 
         // printf("map valide\n");
-        ft_free_mlx(tibs);
         ft_free_pars(tibs, map ,map_4_test);
     }
     return (0);

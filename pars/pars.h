@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:58:18 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/14 20:08:45 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/17 13:52:15 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include "../get_next_line/get_next_line.h"
-#include "../minilibx-linux/mlx.h"
+// #include "../minilibx-linux/mlx.h"
 #include "../libft/libft.h"
 
 typedef struct s_rgb
@@ -37,11 +37,10 @@ typedef struct s_tibs
     char    **map;
     t_rgb   *rgb;
     char    direction;
-    void    *mlx_ptr;
-    void    *north_texture;;
-    void    *south_texture;
-    void    *east_texture;
-    void    *west_texture;
+    char   *north_path;;
+    char    *south_path;
+    char    *east_path;
+    char    *west_path;
 }              t_tibs;
 
 char    **ft_map_dup(char **map);
@@ -54,5 +53,6 @@ void    ft_free_map(char **map);
 char    ft_wich_direction(char **map);
 int     ft_check_texture(char **map, t_tibs *tibs);
 void    ft_free_mlx(t_tibs *tibs);
+void    ft_memdel(void **ptr);
 
 #endif

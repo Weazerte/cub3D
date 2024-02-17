@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 18:08:07 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:46 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/17 13:53:08 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(char *src)
 	int		i;
 
 	i = 0;
+	if (src == NULL)
+		return (NULL);
 	while (src[i] != '\0')
 		i++;
 	str = malloc(i * sizeof(char) + 1);

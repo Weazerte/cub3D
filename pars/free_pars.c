@@ -6,27 +6,18 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:58:01 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/14 20:08:26 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/17 13:51:56 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 
-void    ft_free_mlx(t_tibs *tibs)
+void    ft_memdel(void **ptr)
 {
-    if (tibs->north_texture)
-        mlx_destroy_image(tibs->mlx_ptr, tibs->north_texture);
-    if (tibs->south_texture)
-        mlx_destroy_image(tibs->mlx_ptr, tibs->south_texture);
-    if (tibs->east_texture)
-        mlx_destroy_image(tibs->mlx_ptr, tibs->east_texture);
-    if (tibs->west_texture)
-        mlx_destroy_image(tibs->mlx_ptr, tibs->west_texture);
-    if (tibs->mlx_ptr)
+    if (ptr)
     {
-        if (tibs->mlx_ptr)
-            mlx_destroy_display(tibs->mlx_ptr);
-        free(tibs->mlx_ptr);
+        free(*ptr);
+        *ptr = NULL;
     }
 }
 
@@ -44,6 +35,14 @@ void    ft_free_tibs(t_tibs *tibs)
             i++;
         }
     }
+    if (tibs->north_path)
+        free(tibs->north_path);
+    if (tibs->south_path)
+        free(tibs->south_path);
+    if (tibs->east_path)
+        free(tibs->east_path);
+    if (tibs->west_path)
+        free(tibs->west_path);
     if (tibs->map)
         free(tibs->map);
     free(tibs);
