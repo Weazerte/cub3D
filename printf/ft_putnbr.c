@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_spawn.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:45:45 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/20 17:35:12 by eaubry           ###   ########.fr       */
+/*   Created: 2022/09/20 14:21:38 by eaubry            #+#    #+#             */
+/*   Updated: 2022/12/12 16:19:53 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include "ft_printf.h"
 
-// check if there is only one spawn point
-int	ft_check_spawn(char **map)
+int	ft_putnbr(int nb)
 {
-	int	i;
-	int	j;
-	int	spawn;
+	int	count;
 
-	i = 0;
-	spawn = 0;
-	while (map[i])
+	count = 0;
+	if (nb == -2147483648)
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
-				spawn++;
-			j++;
-		}
-		i++;
+		count += ft_putstr("-2147483648");
+		return (count);
 	}
-	if (spawn != 1)
+	if (nb < 0)
 	{
-		ft_printf("Error Invalid spawn\n");
-		return (1);
+		nb *= -1;
+		count += ft_putchar('-');
 	}
-	return (0);
+	if (nb > 9)
+	{
+		count += ft_putnbr(nb / 10);
+		count += ft_putnbr(nb % 10);
+	}
+	else
+		count += ft_putchar(nb + '0');
+	return (count);
 }

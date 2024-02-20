@@ -6,13 +6,13 @@
 #    By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 14:42:13 by eaubry            #+#    #+#              #
-#    Updated: 2024/02/17 13:44:44 by eaubry           ###   ########.fr        #
+#    Updated: 2024/02/20 18:44:48 by eaubry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	pars/pars.c pars/pars_utils.c pars/map_dup.c pars/check_outline.c pars/fill_map.c pars/check_spawn.c pars/free_pars.c \
 			get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-			pars/check_texture.c
+			pars/check_texture.c pars/check_rgb.c pars/main.c pars/check_rgb_utils.c \
 
 NAME    =	cub3d
 
@@ -29,16 +29,18 @@ all:	${NAME}
 
 #minilibx-linux/libmlx.a -lreadline -Lminilibx-linux -lmlx -lXext -lX11 -lm
 
-${NAME}:	libft/libft.a  ${OBJS} 
-	${CC} ${CFLAGS} ${OBJS} -Llibft -lft -o ${NAME} 
+${NAME}:	libft/libft.a printf/libprintf.a  ${OBJS}
+	${CC} ${CFLAGS} ${OBJS} -Llibft -lft -Lprintf -lprintf -o ${NAME} 
 
 clean:
 	rm -f ${OBJS}
 	make -C libft clean
+	make -C printf clean
 
 fclean:	clean
 	rm -f ${NAME}
 	make -C libft fclean
+	make -C printf fclean
 
 re:	fclean all
 
@@ -46,6 +48,9 @@ re:	fclean all
 
 libft/libft.a:
 	make -C libft
+
+printf/libprintf.a:
+	make -C printf
 
 #minilibx-linux/libmlx.a:
 #make -C minilibx-linux

@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_spawn.c                                      :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:45:45 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/20 17:35:12 by eaubry           ###   ########.fr       */
+/*   Created: 2022/12/06 17:14:38 by eaubry            #+#    #+#             */
+/*   Updated: 2022/12/13 17:17:39 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars.h"
+#include "ft_printf.h"
 
-// check if there is only one spawn point
-int	ft_check_spawn(char **map)
+int	ft_printf(const char *str, ...)
 {
-	int	i;
-	int	j;
-	int	spawn;
+	int		i;
+	int		res;
+	va_list	parametersinfos;
 
+	va_start(parametersinfos, str);
 	i = 0;
-	spawn = 0;
-	while (map[i])
+	res = 0;
+	while (str[i] != '\0')
 	{
-		j = 0;
-		while (map[i][j])
+		if (str[i] != '%')
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
-				spawn++;
-			j++;
+			res += ft_putchar(str[i]);
+			i++;
+			continue ;
 		}
 		i++;
+		res += ft_display(parametersinfos, str[i]);
+		i++;
 	}
-	if (spawn != 1)
-	{
-		ft_printf("Error Invalid spawn\n");
-		return (1);
-	}
-	return (0);
+	va_end(parametersinfos);
+	return (res);
 }

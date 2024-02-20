@@ -6,57 +6,57 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:53:08 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/14 20:01:00 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/20 17:35:31 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 
-int ft_map_size(char *map_name)
+int	ft_map_size(char *map_name)
 {
-    int fd;
-    char *line;
-    int i;
+	int		fd;
+	char	*line;
+	int		i;
 
-    i = 0;
-    fd = open(map_name, O_RDONLY);
-    line = get_next_line(fd);
-    while (line)
-    {
-        i++;
-        free(line);
-        line = get_next_line(fd);
-    }
-    if (line)
-        free(line);
-    close(fd);
-    return (i);
+	i = 0;
+	fd = open(map_name, O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		i++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (line)
+		free(line);
+	close(fd);
+	return (i);
 }
 
-char    **ft_fill_map(char *map_name)
+char	**ft_fill_map(char *map_name)
 {
-    int fd;
-    char *line;
-    char **map;
-    int i;
+	int		fd;
+	char	*line;
+	char	**map;
+	int		i;
 
-    i = 0;
-    fd = open(map_name, O_RDONLY);
-    if (fd == -1)
-    {
-        // printf("Error map name\n");
-        return (NULL);
-    }
-    map = malloc(sizeof(char *) * (ft_map_size(map_name) + 1));
-    line = get_next_line(fd);
-    while (line)
-    {
-        map[i] = ft_strdup(line);
-        i++;
-        free(line);
-        line = get_next_line(fd);
-    }
-    map[i] = NULL;
-    close(fd);
-    return (map);
+	i = 0;
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("Error map name\n");
+		return (NULL);
+	}
+	map = malloc(sizeof(char *) * (ft_map_size(map_name) + 1));
+	line = get_next_line(fd);
+	while (line)
+	{
+		map[i] = ft_strdup(line);
+		i++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	map[i] = NULL;
+	close(fd);
+	return (map);
 }

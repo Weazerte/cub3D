@@ -6,88 +6,92 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:52:34 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/17 14:15:24 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:19:45 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 
-
-char   *ft_trunc_path(char *path, int j)
+char	*ft_trunc_path(char *path)
 {
-    char    *tmp;
-    int     i;
-    int     k;
+	char	*tmp;
+	int		i;
+	int		j;
 
-    i = 0;
-    k = j;
-    while (path[k])
-        k++;
-    k--;
-    while (path[k] == ' '|| path[k] == '\n' || path[k] == ' ')
-        k--;
-    tmp = (char *)malloc(sizeof(char) * (ft_strlen(path) - j - k + 1));
-    if (tmp == NULL)
-        return (NULL);
-    while (path[j])
-    {
-        tmp[i] = path[j];
-        i++;
-        j++;
-    }
-    tmp[i] = '\0';
-    return (tmp);
+	i = 0;
+	j = 0;
+	while (path[j])
+	{
+		if (path[j] == '\n' || path[j] == ' ')
+			break ;
+		j++;
+	}
+	tmp = malloc(sizeof(char) * (j + 1));
+	if (tmp == NULL)
+		return (NULL);
+	while (path[j])
+	{
+		if (path[j] == '\n')
+			return (tmp[i] = '\0', tmp);
+		tmp[i] = path[j];
+		i++;
+		j++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
 }
 
-static char    *ft_find_path(char **map, char first, char scnd)
+static char	*ft_find_path(char **map, char first, char scnd, int *pos)
 {
-    int i;
-    int j;
-    char *tmp;
+	int		i;
+	int		j;
+	char	*tmp;
 
-    i = 0;
-    while (map[i])
-    {
-        j = ft_skip_space(map[i]);
-        if ((map[i][j] == first && map[i][j + 1] == ' ') || (map[i][j] == first && map[i][j + 1] == scnd))
-        {
-            while (map[i][j] != ' ')
-                j++;
-            j += ft_skip_space(map[i] + j);
-            tmp = ft_strdup(ft_trunc_path(map[i], j));
-            return (tmp);
-        }
-        j = 0;
-        i++;
-    }
-    return (NULL);
+	i = 0;
+	while (map[i])
+	{
+		j = ft_skip_space(map[i]);
+		if ((map[i][j] == first && map[i][j + 1] == ' ') || (map[i][j] == first
+				&& map[i][j + 1] == scnd))
+		{
+			*pos = i;
+			while (map[i][j] != ' ')
+				j++;
+			j += ft_skip_space(map[i] + j);
+			tmp = ft_trunc_path(map[i] + j);
+			return (tmp);
+		}
+		i++;
+	}
+	return (NULL);
 }
 
-int ft_check_texture(char **map, t_tibs *tibs)
+int	ft_check_texture(char **map, t_tibs *tibs)
 {
-    char    *tmp;
+	char	*tmp;
+	int i;
+	int	*tab;
 
-    tmp = ft_find_path(map, 'N', 'O');
-    printf("tmp = %s\n", tmp);
-    tibs->north_path = ft_strdup(tmp);
-    ft_memdel((void **)&tmp);
-    tmp = ft_find_path(map, 'S', 'O');
-    printf("tmp = %s\n", tmp);
-    tibs->south_path = ft_strdup(tmp);
-    ft_memdel((void **)&tmp);
-    tmp = ft_find_path(map, 'E', 'A');
-    printf("tmp = %s\n", tmp);
-    tibs->east_path = ft_strdup(tmp);
-    ft_memdel((void **)&tmp);
-    tmp = ft_find_path(map, 'W', 'E');
-    printf("tmp = %s\n", tmp);
-    tibs->west_path = ft_strdup(tmp);
-    ft_memdel((void **)&tmp);
-    if (tibs->north_path == NULL || tibs->south_path == NULL ||
-        tibs->east_path == NULL || tibs->west_path == NULL)
-    {
-        printf("Error missing texture\n");
-        return (1);
-    }
-    return (0);
+	i = 0;
+	tab = malloc(sizeof(int) * 7);
+	tmp = ft_find_path(map, 'N', 'O', &i);
+	tab[0] = i;
+	tibs->north_path = tmp;
+	tmp = ft_find_path(map, 'S', 'O', &i);
+	tab[1] = i;
+	tibs->south_path = tmp;
+	tmp = ft_find_path(map, 'E', 'A', &i);
+	tab[2] = i;
+	tibs->east_path = tmp;
+	tmp = ft_find_path(map, 'W', 'E', &i);
+	tab[3] = i;
+	tibs->west_path = tmp;
+	if (ft_check_rgb_floor(&tibs->floor, map, &tab) == 1)
+		return (1);
+	if (ft_check_rgb_ceiling(&tibs->ceiling, map, tab) == 1)
+		return (1);
+	if (tibs->north_path == NULL || tibs->south_path == NULL
+		|| tibs->east_path == NULL || tibs->west_path == NULL)
+		return (ft_printf("Error missing texture\n"), 1);
+	return (0);
 }

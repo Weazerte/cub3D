@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_spawn.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:45:45 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/20 17:35:12 by eaubry           ###   ########.fr       */
+/*   Created: 2024/02/20 17:10:59 by eaubry            #+#    #+#             */
+/*   Updated: 2024/02/20 17:59:07 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pars.h"
 
-// check if there is only one spawn point
-int	ft_check_spawn(char **map)
+int	main(int ac, char **av)
 {
-	int	i;
-	int	j;
-	int	spawn;
+	t_tibs tibs;
 
-	i = 0;
-	spawn = 0;
-	while (map[i])
+	if (ac == 2)
 	{
-		j = 0;
-		while (map[i][j])
+		if (ft_pars(&tibs, av) == 1)
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
-				spawn++;
-			j++;
+			ft_free_pars(&tibs, NULL, NULL);
+			return (1);
 		}
-		i++;
-	}
-	if (spawn != 1)
-	{
-		ft_printf("Error Invalid spawn\n");
-		return (1);
+		ft_printf("map valide\n");
+		ft_free_tibs(&tibs);
 	}
 	return (0);
 }
+
+//error avec : ligne vide dans map / manque virgule rgb / parser correctement les path text
