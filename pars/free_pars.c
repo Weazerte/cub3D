@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:58:01 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/20 17:53:45 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/21 14:20:14 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	ft_memdel(void **ptr)
 
 void	ft_free_tibs(t_tibs *tibs)
 {
-	int	i;
-
-	i = 0;
 	if (tibs->map)
 		ft_free_map(tibs->map);
 	if (tibs->north_path)

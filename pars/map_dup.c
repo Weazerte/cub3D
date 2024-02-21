@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:24:33 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/20 17:35:54 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/21 14:19:35 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,18 @@ char	**ft_map_dup(char **map)
 	map_size--;
 	j = map_size;
 	while (map[map_size])
-		map_size++;
-	copie = (char **)malloc(sizeof(char *) * (map_size + 1));
-	i = 0;
-	while (map[j])
 	{
-		copie[i] = ft_strdup(map[j]);
-		i++;
-		j++;
+		if (map[map_size] == 0)
+			continue ;
+		map_size++;
+	}
+	copie = (char **)malloc(sizeof(char *) * (map_size + 1));
+	i = -1;
+	while (map[j++])
+	{
+		if (map[j] == 0)
+			continue ;
+		copie[++i] = ft_strdup(map[j]);
 	}
 	copie[i] = 0;
 	return (copie);
