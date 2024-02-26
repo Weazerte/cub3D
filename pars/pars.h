@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: weaz <weaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:58:18 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/20 19:18:18 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/22 00:46:59 by weaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ char		ft_wich_direction(char **map);
 int			ft_check_texture(char **map, t_tibs *tibs);
 void		ft_free_mlx(t_tibs *tibs);
 void		ft_memdel(void **ptr);
-int			ft_check_rgb_ceiling(t_rgb *rgb, char **map, int *tab);
-int			ft_check_rgb_floor(t_rgb *rgb, char **map, int **tab);
+int			ft_check_rgb_ceiling(t_rgb *rgb, char **map);
+int			ft_check_rgb_floor(t_rgb *rgb, char **map);
 int			ft_check_coma(t_rgb *rgb, char *str);
 int			ft_check_tab(int *tab);
 

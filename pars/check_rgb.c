@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: weaz <weaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:13:47 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/20 19:18:32 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/22 00:48:10 by weaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,17 @@ void	ft_fill_rgb(t_rgb *rgb, char *str)
 	return ;
 }
 
-int	ft_check_rgb_floor(t_rgb *rgb, char **map, int **tab)
+int	ft_check_rgb_floor(t_rgb *rgb, char **map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	*tab[6] = -1;
 	while (map[i])
 	{
 		j = ft_skip_space(map[i]);
 		if (map[i][j] == 'F')
 		{
-			*tab[4] = i;
 			j++;
 			j += ft_skip_space(map[i] + j);
 			if (ft_isdigit(map[i][j]) == 1)
@@ -112,7 +110,7 @@ int	ft_check_rgb_floor(t_rgb *rgb, char **map, int **tab)
 	return (0);
 }
 
-int	ft_check_rgb_ceiling(t_rgb *rgb, char **map, int *tab)
+int	ft_check_rgb_ceiling(t_rgb *rgb, char **map)
 {
 	int	i;
 	int	j;
@@ -124,7 +122,6 @@ int	ft_check_rgb_ceiling(t_rgb *rgb, char **map, int *tab)
 		j = ft_skip_space(map[i]);
 		if (map[i][j] == 'C')
 		{
-			tab[5] = i;
 			j++;
 			j += ft_skip_space(map[i] + j);
 			if (ft_isdigit(map[i][j]) == 1)
@@ -133,8 +130,6 @@ int	ft_check_rgb_ceiling(t_rgb *rgb, char **map, int *tab)
 		}
 		i++;
 	}
-	if (ft_check_tab(tab) == 1)
-		return (printf("Error Invalid texture/rgb order\n"), 1);
 	if ((rgb->b < 0 || rgb->b > 255) || (rgb->g < 0 || rgb->g > 255)
 		|| (rgb->r < 0 || rgb->r > 255))
 		return (printf("Error Invalid ceiling color\n"), 1);

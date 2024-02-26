@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: weaz <weaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:10:59 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/20 17:59:07 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/02/22 01:42:30 by weaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	{
 		if (ft_pars(&tibs, av) == 1)
 		{
-			ft_free_pars(&tibs, NULL, NULL);
+			// ft_free_pars(&tibs, NULL, NULL);
 			return (1);
 		}
 		ft_printf("map valide\n");
@@ -29,4 +29,4 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-//error avec : ligne vide dans map / manque virgule rgb / parser correctement les path text
+//error avec : parser correctement les path text
