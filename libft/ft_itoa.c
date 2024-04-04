@@ -3,90 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 20:16:22 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/18 19:21:32 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/14 19:52:03 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 16:38:19 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_calloc_str(size_t size)
+static int	ft_count(long int nb)
 {
-	char	*new;
-	size_t	i;
+	int	k;
 
-	i = 0;
-	new = (char *)malloc(sizeof(char) * size + 1);
-	if (!new)
-		return (NULL);
-	while (i < size)
+	k = 0;
+	if (nb == 0)
+		return (k = 1);
+	if (nb < 0)
 	{
-		new[i] = '\0';
-		i++;
+		nb = -nb;
+		k++;
 	}
-	new[i] = '\0';
-	return (new);
-}
-
-static int	get_size_str(long long int n)
-{
-	long long int	i;
-
-	i = 1;
-	if (n < 0)
-		n = n * -1;
-	while (n >= 10)
+	while (nb > 0)
 	{
-		n = n / 10;
-		i++;
+		nb /= 10;
+		k++;
 	}
-	return (i);
-}
-
-static char	*fill_str(char *str, long long int n, int len)
-{
-	int		start;
-
-	str[len] = '\0';
-	len = len - 1;
-	if (n < 0)
-	{
-		n = n * -1;
-		start = 1;
-		str[0] = '-';
-	}
-	else
-		start = 0;
-	while (len >= start)
-	{
-		str[len] = n % 10 + '0';
-		n = n / 10;
-		len--;
-	}
-	return (str);
+	return (k);
 }
 
 char	*ft_itoa(int n)
 {
-	char			*str;
-	int				len;
-	long long int	nbr;
+	char		*s;
+	long int	nb;
+	int			k;
 
-	nbr = n;
-	len = get_size_str(nbr);
-	if (nbr < 0)
-		len = len + 1;
-	str = ft_calloc_str(len);
-	if (!str)
+	nb = n;
+	k = ft_count(nb);
+	s = (char *)malloc(k * sizeof(char) + 1);
+	if (s == NULL)
 		return (NULL);
-	str = fill_str(str, nbr, len);
-	return (str);
+	s[k] = '\0';
+	k--;
+	if (nb == 0 || nb == -0)
+		s[0] = '0';
+	else if (nb < 0)
+	{
+		s[0] = '-';
+		nb = -nb;
+	}
+	while (nb > 0)
+	{
+		s[k] = nb % 10 + '0';
+		nb = nb / 10;
+		k--;
+	}
+	return (s);
 }
 
-// int	main()
-// {
-// 	printf("%s\n", ft_itoa(2147483647));
-// 	return (0);
-// }
+/*
+#include <limits.h>
+#include <stdio.h>
+int main()
+{
+	int nb = -0;
+	printf("%s\n", ft_itoa(nb));
+	return (0);
+}
+*/

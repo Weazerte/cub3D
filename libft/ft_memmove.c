@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:43:10 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:12 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/08 16:23:09 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 19:24:52 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,38 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+
+/*
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	//test tab
+	int tab[] = {3, 65, 78, 29, 50};
+	int *cpy = NULL;
+	size_t len = sizeof(int) * 5;
+	int i = 0;
+
+	cpy = (int *)malloc(len);
+	if (cpy == NULL)
+		return (0);
+	ft_memmove(cpy, tab, len);
+	while (i < 5)
+	{
+		printf("%d\n", cpy[i]);
+		i++;
+	}
+
+	//test str
+	char str[] = "hello world";
+	char *cpystr = NULL;
+	size_t strlen = sizeof(str);
+
+	cpystr = (char *)malloc(strlen);
+	if (cpystr == NULL)
+		return (0);
+	ft_memmove(cpystr, str, strlen);
+	printf("%s\n", cpystr);
+	return (0);
+}
+*/

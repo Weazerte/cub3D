@@ -3,52 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 14:02:35 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:54:38 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/09 12:03:54 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/21 11:51:24 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_equal(char *tmp, const char *little, size_t len, size_t i)
-{
-	size_t	j;
-
-	j = 0;
-	while (i < len && tmp[i] == little[j] && little[j])
-	{
-		j++;
-		i++;
-	}
-	return (j);
-}
-
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t		i;
-	size_t		j;
-	char		*tmp;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	if (ft_strlen((char *)little) == 0)
+	j = 0;
+	if (little[0] == '\0')
 		return ((char *)big);
-	tmp = (char *)big;
-	while (tmp[i] && i < len)
+	while (big[i] && i + j < len)
 	{
-		j = 0;
-		if (tmp[i] == little[0])
-			j = ft_equal(tmp, little, len, i);
-		if (j == (ft_strlen(little)))
-			return (tmp + i);
-		i++;
+		if (big[i + j] == little[j])
+		{
+			if (little[++j] == '\0')
+				return ((char *)big + i);
+		}
+		else
+		{
+			j = 0;
+			i++;
+		}
 	}
 	return (NULL);
 }
 
-// int	main()
-// {
-// 	printf("%s\n", ft_strnstr("", "", -1));
-// 	return (0);
-// }
+/*
+#include <bsd/string.h>
+#include <stdio.h>
+int	main()
+{
+	char *big = "lorem ipsum dolor sit amet";
+	char *little = "dolor";
+	char *big2 = "lorem ipsum dolor sit amet";
+	char *little2 = "dolor";
+	printf("%s %p\n", ft_strnstr(big, little, 15), ft_strnstr(big, little, 15));
+	printf("%s %p\n", strnstr(big2, little2, 15), strnstr(big2, little2, 15));
+	return (0);
+}
+*/

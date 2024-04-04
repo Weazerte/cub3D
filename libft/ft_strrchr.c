@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 17:42:35 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:54:44 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/09 11:56:35 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 21:13:47 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	char	*str;
+	int		i;
 
-	i = 0;
-	while (s[i])
-		i++;
+	str = (char *)s;
+	i = ft_strlen(str);
 	while (i >= 0)
 	{
-		if (s[i] == (const char)c)
-			return ((char *)&s[i]);
+		if (str[i] == (char)c)
+			return (str + i);
 		i--;
 	}
 	return (NULL);
 }
 
-// int	main()
-// {
-// 	char	test[] = "tripouille";
-// 	char	test1[] = "tripouille";
-// 	printf("%s\n", ft_strrchr(test, 't' + 256));
-// 	printf("%s\n", strrchr(test1, 't' + 256));
-// 	return (0);
-// }
+/*
+#include <string.h>
+#include <stdio.h>
+int main()
+{
+	char str2[] = "bonjour";
+	printf("%s, %p\n", ft_strrchr(str2, '\0'), ft_strrchr(str2, '\0'));
+	printf("%s, %p\n", strrchr(str2, '\0'), strrchr(str2, '\0'));
+	return 0;
+}
+*/

@@ -3,47 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 18:08:07 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/17 13:53:08 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/10 00:16:19 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 16:06:43 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(const char *s)
 {
-	char	*str;
+	char	*dup;
+	char	*src;
+	int		len;
 	int		i;
 
 	i = 0;
-	if (src == NULL)
+	src = (char *)s;
+	len = ft_strlen(src) + 1;
+	dup = (char *)malloc(len * sizeof(char));
+	if (dup == NULL)
 		return (NULL);
-	while (src[i] != '\0')
-		i++;
-	str = malloc(i * sizeof(char) + 1);
-	if (str != NULL)
+	while (src[i])
 	{
-		i = 0;
-		while (src[i] != '\0')
-		{
-			str[i] = src[i];
-			i++;
-		}
-		str[i] = '\0';
+		dup[i] = src[i];
+		i++;
 	}
-	return (str);
+	dup[i] = '\0';
+	return (dup);
 }
 
-// int main(void)
-// {
-// 	char	*str;
-// 	char	*streal;
-// 	char	*src = "abcdesfsdgsdgsdgsgsdsddgsdgsfs";
-
-// 	streal = strdup(src);
-// 	str = ft_strdup(src);
-// 	printf("%c %c\n", streal[0], streal[70]);
-// 	printf("%c %c", str[0], str[70]);
-// }
+/*
+#include <stdio.h>
+int main()
+{
+	char *str = "hello la";
+	printf("%s\n", ft_strdup(str));
+	return 0;
+}
+*/

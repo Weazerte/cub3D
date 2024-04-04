@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 13:45:13 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:06 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/09 19:52:20 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:36:40 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,38 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*tmps1;
-	unsigned char	*tmps2;
+	size_t	i;
 
 	i = 0;
-	tmps1 = (unsigned char *)s1;
-	tmps2 = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
 	while (i < n)
 	{
-		if (tmps1[i] != tmps2[i])
-			return (tmps1[i] - tmps2[i]);
+		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+			return (((int)((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]));
 		i++;
 	}
 	return (0);
 }
 
-// int	main()
-// {
-// 	char	s1[] = "t\200";
-// 	char	s2[] = "t\0";
-// 	printf("%d\n", ft_memcmp(s1, s2, 2));
-// 	printf("%d\n", memcmp(s1, s2, 2));
-// 	return (0);
-// }
+/*
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	//test tab	
+	int tab[] = {2, 8, 7, 10};
+	int tab2[] = {2, 8, 9, 10};
+	
+	printf("%d\n", memcmp(tab, tab2, sizeof(tab)));
+	printf("%d\n", ft_memcmp(tab, tab2, sizeof(tab)));
+
+	//test str
+	char str[] = "hello world";
+	char str2[] = "hello tenny";
+	
+	printf("%d\n", ft_memcmp(str, str2, sizeof(str)));
+	printf("%d\n", memcmp(str, str2, sizeof(str)));
+	return (0);
+}
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 16:12:14 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/15 20:09:15 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/14 14:58:42 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 18:51:11 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,38 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		i;
-	int		j;
-	char	*str;
+	size_t		len1;
+	size_t		len2;
+	size_t		i;
+	char		*str;
 
-	str = malloc((ft_strlen((char *)s1)
-				+ ft_strlen((char *)s2) + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
+	if (s1 && s2)
 	{
-		str[j] = s1[i];
-		i++;
-		j++;
+		len1 = ft_strlen(s1);
+		len2 = ft_strlen(s2);
+		str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
+		if (!str)
+			return (NULL);
+		i = -1;
+		while (s1[++i])
+			str[i] = s1[i];
+		i = -1;
+		while (s2[++i])
+			str[len1 + i] = s2[i];
+		str[len1 + i] = '\0';
+		return (str);
 	}
-	i = 0;
-	while (s2[i])
-	{
-		str[j] = s2[i];
-		i++;
-		j++;
-	}
-	str[j] = '\0';
-	return (str);
+	return (NULL);
 }
 
-// int	main()
-// {
-// 	char	s1[] = "Hello";
-// 	char	s2[] = "World";
-// 	printf("%s\n", ft_strjoin(s1, s2));
-// 	return (0);
-// }
+/*
+#include <stdio.h>
+int	main()
+{
+	char	*s1 = "";
+	char	*s2 = "dolor sit amet";
+
+	printf("%s\n", ft_strjoin(s1, s2));
+	return (0);
+}
+*/

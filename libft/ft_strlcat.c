@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 19:53:01 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:57 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/09 14:38:12 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/18 19:33:25 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,34 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
+	size_t	dlen;
+	size_t	slen;
 	size_t	i;
-	size_t	dest_length;
-	size_t	src_length;
 
-	src_length = ft_strlen(src);
-	dest_length = ft_strlen(dst);
 	i = 0;
-	if (dest_length < size - 1 && size > 0)
+	dlen = ft_strlen(dst);
+	slen = ft_strlen(src);
+	if (!size || size <= dlen)
+		return (slen + size);
+	while (src[i] && dlen + i < size - 1)
 	{
-		while (src[i] && (dest_length + i) < (size - 1))
-		{
-			dst[dest_length + i] = src[i];
-			i++;
-		}
-		dst[dest_length + i] = 0;
+		dst[dlen + i] = src[i];
+		i++;
 	}
-	if (dest_length >= size)
-		dest_length = size;
-	return (dest_length + src_length);
+	dst[dlen + i] = '\0';
+	return (dlen + slen);
 }
 
-// int main (void)
-// {
-//     char    str[] = "rrrrrrrrrrrrrrr";
-//     int    i;
-
-//     i = ft_strlcat(str,"lorem ipsum dolor sit amet", 5);
-//     printf("%s", str);
-//     printf("%d", i);
-//     return (0);
-// }
+/*
+#include <stdio.h>
+#include <bsd/string.h>
+int main()
+{	
+	//if size < destlen -> return srclen + size
+	//else return destlen + srclen
+	char dst[20] = "hello";
+	char src[20] = "world";
+	printf("strcat = %ld\n", ft_strlcat(dst, src, 10));
+	return(0);
+}
+*/

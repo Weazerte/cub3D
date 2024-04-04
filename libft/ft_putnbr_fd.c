@@ -3,40 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 14:21:38 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:28 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/14 19:09:40 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:41:52 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_putchar(char c, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	write(fd, &c, 1);
+	unsigned int	i;
+
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	i = n;
+	if (i > 9)
+	{
+		ft_putnbr_fd(i / 10, fd);
+		i = i % 10;
+	}
+	ft_putchar_fd(i + '0', fd);
 }
 
-void	ft_putnbr_fd(int nb, int fd)
+/*
+#include <limits.h>
+int	main()
 {
-	if (nb < 0)
-	{
-		nb *= -1;
-		ft_putchar('-', fd);
-	}
-	if (nb == -2147483648)
-		write(fd, "2147483648", 10);
-	else if (nb > 9)
-	{
-		ft_putnbr_fd(nb / 10, fd);
-		ft_putnbr_fd(nb % 10, fd);
-	}
-	else
-		ft_putchar(nb + '0', fd);
+	ft_putnbr_fd(INT_MIN, 1);
 }
-
-/*int main (void)
-{
-	ft_putnbr(42424242);
-	return (0);
-}*/
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 20:08:48 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:22 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/14 19:04:10 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:40:15 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,12 @@ void	ft_putendl_fd(char *s, int fd)
 	}
 	write(fd, "\n", 1);
 }
+
+/*
+int main()
+{
+	char	*str = "hello";
+	ft_putendl_fd(str, 1);
+	return (0);
+}
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 17:33:36 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:41 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/08 12:04:10 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/18 13:52:58 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,27 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
-	char	t;
+	char	*str;
 
-	i = 0;
-	t = ((unsigned char)c);
-	if (c == '\0')
+	str = (char *)s;
+	while (*str != c && ft_isascii(c))
 	{
-		while (s[i])
-			i++;
-		return ((char *)&s[i]);
+		if (*str == '\0')
+			return (NULL);
+		str++;
 	}
-	while (s[i])
-	{
-		if (s[i] == t)
-			return ((char *)&s[i]);
-		i++;
-	}
-	return (NULL);
+	return (str);
 }
 
-// int	main()
-// {
-// 	char	test[] = "tripouille";
-// 	char	test1[] = "tripouille";
-// 	printf("%s\n", ft_strchr(test, 't' + 256));
-// 	printf("%s\n", strchr(test1, 't' + 256));
-// 	return (0);
-// }
+/*
+#include <string.h>
+#include <stdio.h>
+int main()
+{
+	char str[] = "hello 0 world";
+	char a = 0;
+	printf("%s, %p\n", ft_strchr(str, a), ft_strchr(str, a));
+	printf("%s, %p\n", strchr(str, a), strchr(str, a));
+	return 0;
+}
+*/

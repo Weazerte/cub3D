@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: weaz <weaz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 12:39:00 by eaubry            #+#    #+#             */
-/*   Updated: 2024/02/22 09:29:48 by weaz             ###   ########.fr       */
+/*   Created: 2022/11/08 11:52:23 by thenry            #+#    #+#             */
+/*   Updated: 2024/02/26 23:46:41 by weaz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,15 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-// int	main()
-// {
-// 	printf("%d\n", ft_strncmp("test\200", "test\0", 6));
-// 	printf("%d\n", strncmp("test\200", "test\0", 6));
-// 	return (0);
-// }
+/*
+#include <string.h>
+#include <stdio.h>
+int main()
+{
+	char *str = "test\200";
+	char *str2 = "test\0";
+	printf("%d\n", ft_strncmp(str, str2, 6));
+	printf("%d\n", strncmp(str, str2, 6));
+	return 0;
+}
+*/

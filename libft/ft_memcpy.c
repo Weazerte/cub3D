@@ -3,28 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:40:21 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:27:01 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/08 15:10:29 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:37:13 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, int n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int		i;
-	char	*src_tmp;
-	char	*dest_tmp;
+	size_t		i;
+	char		*d;
+	const char	*s;
 
-	src_tmp = (char *)src;
-	dest_tmp = (char *)dest;
 	i = 0;
+	d = dest;
+	s = src;
 	while (i < n)
 	{
-		dest_tmp[i] = src_tmp[i];
+		d[i] = s[i];
 		i++;
 	}
 	return (dest);
 }
+
+/*
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	//test tab
+	int tab[] = {3, 65, 78, 29, 50};
+	int *cpy = NULL;
+	size_t len = sizeof(int) * 5;
+	int i = 0;
+
+	cpy = (int *)malloc(len);
+	if (cpy == NULL)
+		return (0);
+	ft_memcpy(cpy, tab, len);
+	while (i < 5)
+	{
+		printf("%d\n", cpy[i]);
+		i++;
+	}
+
+	//test str
+	char str[] = "hello world";
+	char *cpystr = NULL;
+	size_t strlen = sizeof(str);
+
+	cpystr = (char *)malloc(strlen);
+	if (cpystr == NULL)
+		return (0);
+	ft_memcpy(cpystr, str, strlen);
+	printf("%s\n", cpystr);
+	return (0);
+}
+*/

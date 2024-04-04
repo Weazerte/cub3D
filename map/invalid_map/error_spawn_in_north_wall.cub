@@ -1,0 +1,15 @@
+NO ./textures/thenry64.xpm
+SO ./textures/colorstone.xpm
+WE ./textures/redbrick.xpm
+EA ./textures/wood.xpm
+
+F 0,0,255
+C 150,30,255
+
+11N1111
+1000011
+1000001
+1000001
+1000001
+1000001
+1111111

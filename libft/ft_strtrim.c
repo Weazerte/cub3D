@@ -3,58 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 17:09:35 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:54:49 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/14 16:29:32 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/16 17:41:42 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isset(const char s, const char *set)
+static int	ft_start(const char *s1, const char *set)
 {
-	int	i;
+	size_t	start;
+	size_t	len;
 
-	i = 0;
-	while (set[i])
+	len = ft_strlen(s1);
+	start = 0;
+	while (start < len)
 	{
-		if (set[i] == s)
-			return (1);
-		i++;
+		if (ft_strchr(set, s1[start]) == 0)
+			break ;
+		start++;
 	}
-	return (0);
+	return (start);
+}
+
+static int	ft_end(const char *s1, const char *set)
+{
+	size_t		end;
+
+	end = ft_strlen(s1);
+	while (end > 0)
+	{
+		if (ft_strrchr(set, s1[end - 1]) == 0)
+			break ;
+		end--;
+	}
+	return (end);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*str;
+	char	*tr;
 	int		start;
 	int		end;
-	int		i;
 
-	start = 0;
-	while (s1[start] && ft_isset(s1[start], set))
-		start++;
-	if (s1[start] == '\0')
-		return (ft_strdup(""));
-	end = ft_strlen((char *)s1);
-	while (end > start && ft_isset(s1[end - 1], set))
-		end--;
-	str = (char *)malloc(((end - start) + 1) * sizeof(*s1));
-	if (!str)
+	if (!s1)
 		return (NULL);
-	i = 0;
-	while (start < end)
-		str[i++] = s1[start++];
-	str[i] = '\0';
-	return (str);
+	if (!set)
+		return (ft_strdup(s1));
+	start = ft_start(s1, set);
+	end = ft_end(s1, set);
+	if (start >= end)
+		return (ft_strdup(""));
+	tr = (char *)malloc((end - start) * sizeof(char) + 1);
+	if (tr == NULL)
+		return (NULL);
+	ft_strlcpy(tr, s1 + start, end - start + 1);
+	return (tr);
 }
 
-// int	main()
-// {
-// 	char	s[] = "   xxxtripouille";
-// 	char	set[] = " x";
-// 	printf("%s\n", ft_strtrim(s, set));
-// 	return (0);
-// }
+/*
+#include <stdio.h>
+int main()
+{
+	char	*str;
+	char	*set;
+	char	*trim;
+
+	str = "lorem \n ipsum \t dolor \n sit \t amet";
+	set = " ";
+	trim = ft_strtrim(str, set);
+	printf("%s\n", trim);
+	return 0;
+}
+*/

@@ -5,52 +5,82 @@
 #                                                     +:+ +:+         +:+      #
 #    By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/13 14:42:13 by eaubry            #+#    #+#              #
-#    Updated: 2024/02/20 18:44:48 by eaubry           ###   ########.fr        #
+#    Created: 2024/02/13 09:57:09 by thenry            #+#    #+#              #
+#    Updated: 2024/03/28 18:06:09 by eaubry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	pars/pars.c pars/pars_utils.c pars/map_dup.c pars/check_outline.c pars/fill_map.c pars/check_spawn.c pars/free_pars.c \
-			get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-			pars/check_texture.c pars/check_rgb.c pars/main.c pars/check_rgb_utils.c \
+SRCS	=	get_next_line/get_next_line.c \
+			get_next_line/get_next_line_utils.c \
+			src/check_outline.c \
+			src/check_outline_utils.c \
+			src/check_rgb_utils.c \
+			src/check_rgb.c \
+			src/check_spawn.c \
+			src/check_texture.c \
+			src/fill_map.c \
+			src/free_pars.c \
+			src/map_dup.c \
+			src/pars_utils.c \
+			src/pars.c \
+			src/keyhook.c \
+			src/keyhook_bis.c \
+			src/free_struct.c \
+			src/raycast.c \
+			src/init.c \
+			src/init_bis.c \
+			src/render.c \
+			src/minimap.c \
+			src/utils.c \
+			src/main.c \
 
-NAME    =	cub3d
+NAME	= 	cub3D
 
-OBJS    =	${SRCS:.c=.o}
+OBJ_DIR	=	obj
 
-CFLAGS    =    -Wall -Wextra -Werror -g
+OBJS	=	${patsubst %.c, ${OBJ_DIR}/%.o,${SRCS}}
 
-CC	=	cc
+INC		=	-I inc 
 
-all:	${NAME}
+RM		= rm -rf
 
-.c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+CFLAGS	= 	-Wall -Wextra -Werror -g
 
-#minilibx-linux/libmlx.a -lreadline -Lminilibx-linux -lmlx -lXext -lX11 -lm
+CC	= 	cc
 
-${NAME}:	libft/libft.a printf/libprintf.a  ${OBJS}
-	${CC} ${CFLAGS} ${OBJS} -Llibft -lft -Lprintf -lprintf -o ${NAME} 
+LIBR	=	libft/libft.a minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a
 
-clean:
-	rm -f ${OBJS}
-	make -C libft clean
-	make -C printf clean
+MLX	=	-Lminilibx-linux -lX11 -lXext
 
-fclean:	clean
-	rm -f ${NAME}
-	make -C libft fclean
-	make -C printf fclean
+MATH =	-lm
 
-re:	fclean all
+all:		${NAME}
 
-.PHONY:	all clean fclean re bonus
+${OBJ_DIR}/%.o: %.c | ${OBJ_DIR}
+		${CC} ${INC} ${CFLAGS} -MMD -MP -c $< -o $@
 
-libft/libft.a:
-	make -C libft
 
-printf/libprintf.a:
-	make -C printf
+${OBJ_DIR}:
+		mkdir -p ${OBJ_DIR}
+		mkdir -p ${OBJ_DIR}/get_next_line
+		mkdir -p ${OBJ_DIR}/src
 
-#minilibx-linux/libmlx.a:
-#make -C minilibx-linux
+${NAME}:	${OBJS}
+		make -C libft
+		make -C minilibx-linux
+		${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${INC} ${LIBR} ${MLX} ${MATH}
+
+-include ${OBJS:.o=.d}
+
+clean:		
+		${RM} ${OBJ_DIR}	
+		make -C libft clean
+		make -C minilibx-linux clean
+
+fclean:		clean
+		${RM} ${NAME}
+		make -C libft fclean
+
+re:		fclean all
+
+.PHONY:		all re clean fclean

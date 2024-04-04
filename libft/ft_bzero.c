@@ -3,34 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 14:37:02 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:50:52 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/07 13:12:35 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 15:52:44 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, int n)
+void	ft_bzero(void *s, size_t n)
 {
-	char	*m;
+	char	*tmp;
 
-	m = ((char *)s);
-	while (n--)
+	tmp = s;
+	while (n)
 	{
-		*m = 0;
-		m++;
+		*tmp = 0;
+		tmp++;
+		n--;
 	}
 }
 
-// int	main()
-// {
-// 	char	t[] = "0123456789";
+/*
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	int i = 0;
+        char str[] = "hello world";
+	int tab[3] = {1, 2, 3};
 
-// 	ft_bzero(t, sizeof(t));
-// 	printf("%s\n", t);
-// 	bzero(t, sizeof(t));
-// 	printf("%s\n", t);
-// 	return (0);
-// }
+	//test str
+        printf("%s\n", str);
+        ft_bzero(str, 5);
+        printf("%s\n", str);
+
+	//test tab
+	while (i < 3)
+	{
+		printf("%d\n", tab[i]);
+		i++;
+	}
+	i = 0;
+	ft_bzero(tab, sizeof(tab));
+	while (i < 3)
+	{
+		printf("%d\n", tab[i]);
+		i++;
+	}
+        return 0;
+}
+*/

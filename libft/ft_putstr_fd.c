@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 19:39:52 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:53:31 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/14 18:54:17 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/15 14:43:08 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,12 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
+
+/*
+int main()
+{
+	char	*str = "hello";
+	ft_putstr_fd(str, 1);
+	return (0);
+}
+*/

@@ -3,53 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: thenry <thenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 15:56:55 by eaubry            #+#    #+#             */
-/*   Updated: 2022/11/21 11:29:08 by eaubry           ###   ########.fr       */
+/*   Created: 2022/11/14 15:33:32 by thenry            #+#    #+#             */
+/*   Updated: 2022/11/19 14:48:17 by thenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_min(char **copy, char const *s, unsigned int start,
-	size_t len)
-{
-	size_t	min;
-
-	if (len < ft_strlen((char *)s + start))
-		min = len;
-	else
-		min = ft_strlen((char *)s + start);
-	*copy = ft_calloc(min + 1, sizeof(**copy));
-	return (min);
-}
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*copy;
-	size_t	i;
+	char		*sub;
+	size_t		i;
+	size_t		j;
 
-	if (start > ft_strlen((char *)s))
-	{
-		return (ft_calloc(1, 1));
-	}
 	i = 0;
-	len = ft_min(&copy, s, start, len);
-	if (!copy)
+	j = 0;
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	if (start + len > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	sub = (char *)malloc(sizeof(*s) * (len + 1));
+	if (!sub)
 		return (NULL);
-	while (i < len)
+	while (s[i])
 	{
-		copy[i] = ((char *)s)[start];
-		++start;
-		++i;
+		if (i >= start && j < len)
+		{
+			sub[j] = s[i];
+			j++;
+		}
+		i++;
 	}
-	copy[i] = '\0';
-	return (copy);
+	sub[j] = '\0';
+	return (sub);
 }
-//int	main()
-//{
-//	char	s[] = "lorem ipsum dolor sit amet";
-//	printf("%s\n", ft_substr(s, 400, 20));
-//	return (0);
-//}
+
+/*
+#include <stdio.h>
+int main()
+{
+	char *s = "tripouille";
+	char *sub;
+
+	sub = ft_substr(s, 0, 42000);
+	printf("%s\n", sub);
+	return (0);
+}
+//2 6 8 10
+*/
