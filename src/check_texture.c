@@ -6,7 +6,7 @@
 /*   By: eaubry <eaubry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:52:34 by eaubry            #+#    #+#             */
-/*   Updated: 2024/03/28 17:33:51 by eaubry           ###   ########.fr       */
+/*   Updated: 2024/04/04 20:41:32 by eaubry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ int	ft_check_texture(char **map, t_tibs *tibs)
 	tmp = ft_find_path(map, 'S', 'O');
 	tibs->south_path = tmp;
 	tmp = ft_find_path(map, 'W', 'E');
-	tibs->east_path = tmp;
-	tmp = ft_find_path(map, 'E', 'A');
 	tibs->west_path = tmp;
+	tmp = ft_find_path(map, 'E', 'A');
+	tibs->east_path = tmp;
 	if (tibs->north_path == NULL || tibs->south_path == NULL
 		|| tibs->east_path == NULL || tibs->west_path == NULL)
 		return (ft_putstr_fd("Error missing texture\n", 2), 1);
